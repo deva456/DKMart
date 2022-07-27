@@ -1,0 +1,258 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@using DKMart.Utility
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DKMart</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css?version=1" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
+</head>
+<body>
+    <header class="header sticky-top">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-warning  box-" id="navbar">
+            <div class="container position-sticky">
+                <a class="navbar-brand text-dark font-weight-bold" asp-area="" asp-controller="Home" asp-action="Index">DK<span class="text-white">-</span><span class="text-success font-weight-bolder">Mart</span></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-location-dot pl-3 pt-2"></i><span class=" font-weight-light mr-2"> Nashik</span></a>
+                        </li>
+
+                        @*<li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Searchbar</a>
+                            </li>*@
+                    </ul>
+                    <div class="input-group md-form form-sm form-1 pl-0">
+                        <input class="form-control" style="border-block-color:greenyellow" type="text" placeholder="Search products here.." aria-label="Search">
+                        <div class="input-group-append">
+                            <span class="input-group-text amber lighten-3" style="background-color:yellowgreen; cursor:pointer">
+                                <i class="fas fa-search text-white"
+                                   aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="btn btn-outline-light ml-3" style="display:flex; cursor:pointer"><span>Login</span><i class="fa-solid fa-user-tie pt-1 pl-2"></i></div>
+                    <div class="btn btn-outline-dark ml-2" role="button" style="display:flex; cursor:pointer"><span>Signup</span><i class="fa-solid fa-user-tie pt-1 pl-2"></i></div>
+                </div>
+                @* Collapse end *@
+                <!-- Below code is for User UI only-->
+                @*<div class="heart"><i class="fa-solid fa-heart fa-2x"></i></div>*@
+                @if (HttpContextAccessor.HttpContext.Session.Get<List<ShoppingCart>>(WC.SessionCart) != null)
+                {
+                    <a asp-controller="Cart" asp-action="Index" class="nav-link">
+                        @{
+                            var count = HttpContextAccessor.HttpContext.Session.Get<List<ShoppingCart>>(WC.SessionCart).Count;
+                        }
+                        <div class="cart d-inline-flex"><i class="fa-solid fa-bag-shopping fa-2x "></i>&nbsp;<span class="pt-2">@count</span></div>
+                    </a>
+                }
+                else
+                {
+                    <a href="#" class="nav-link">
+                        <div class="cart d-inline-flex"><i class="fa-solid fa-bag-shopping fa-2x "></i>&nbsp;<span class="pt-2">0</span></div>
+                    </a>
+                }
+                <!--Admin UI-->
+                <ul class="navbar-nav mr-auto pl-2">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa-solid fa-sliders"></i><span> Settings</span>
+                        </a>
+                        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                            <a class="nav-link text-warning" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
+                            <a class="nav-link text-warning" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
+                            @*<div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>*@
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </nav>
+    </header>
+    @* below code is for User UI  *@
+
+
+
+    @* categories *@
+
+    <div class="pl-5 pt-2 bg-warning">
+        <h4><span class="text-white"><marquee>Best Deals and FREE Shipping</marquee></span></h4>
+    </div>
+
+    <!-- <div class="d-inline-flex">
+         <div id="sideBar">
+             <ul class="list-group-flush " style="list-style:none">
+                 <li class=" pt-3"><a href="#"> <img class="categs img-thumbnail" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSosX0-Q65AET40vRr4aTMQM9SzqW-7mqukyQ&usqp=CAU" /><hr /></a></li>
+
+                 <li class=""><a href="#"><img class="categs img-thumbnail" src="https://images5.alphacoders.com/334/thumbbig-334704.webp" /><hr /></a></li>
+
+                 <li class=""><a href="#"> <img class="categs img-thumbnail" src="https://images3.alphacoders.com/295/thumbbig-2957.webp" /><hr /></a></li>
+
+                 <li class=""><a href="#"> <img class="categs img-thumbnail" src="https://images8.alphacoders.com/109/thumbbig-1095996.webp" /><hr /></a></li>
+
+                 <li class=""><a href="#"><img class="categs img-thumbnail" src="https://images8.alphacoders.com/368/thumbbig-368650.webp" /><hr /></a></li>
+
+                 <li class=""><a href="#"><img class="categs img-thumbnail" src="https://images4.alphacoders.com/789/thumbbig-789483.webp" /><hr /></a></li>
+             </ul>
+         </div>-->
+
+
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+
+    @*</div>*@
+
+
+
+    <!-- Footer -->
+    <footer class="text-center text-lg-start text-white  my-5"
+            style="background-color: #45526e">
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+            <!-- Section: Links -->
+            <section class="">
+                <!--Grid row-->
+                <div class="row">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold">
+                            Company name
+                        </h6>
+                        <p>
+                            Here you can use rows and columns to organize your footer
+                            content. Lorem ipsum dolor sit amet, consectetur adipisicing
+                            elit.
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <hr class="w-100 clearfix d-md-none" />
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
+                        <p>
+                            <a class="text-white">MDBootstrap</a>
+                        </p>
+                        <p>
+                            <a class="text-white">MDWordPress</a>
+                        </p>
+                        <p>
+                            <a class="text-white">BrandFlow</a>
+                        </p>
+                        <p>
+                            <a class="text-white">Bootstrap Angular</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <hr class="w-100 clearfix d-md-none" />
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold">
+                            Useful links
+                        </h6>
+                        <p>
+                            <a class="text-white">Your Account</a>
+                        </p>
+                        <p>
+                            <a class="text-white">Become an Affiliate</a>
+                        </p>
+                        <p>
+                            <a class="text-white">Shipping Rates</a>
+                        </p>
+                        <p>
+                            <a class="text-white">Help</a>
+                        </p>
+                    </div>
+
+                    <!-- Grid column -->
+                    <hr class="w-100 clearfix d-md-none" />
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+                        <p><i class="fas fa-home mr-3"></i> Indiranagar Nashik</p>
+                        <p><i class="fas fa-envelope mr-3"></i> DKMart@gmail.com</p>
+                        <p><i class="fas fa-phone mr-3"></i> + 91 7058204270</p>
+                        <p><i class="fas fa-print mr-3"></i> + 91 9373051437</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!--Grid row-->
+            </section>
+            <!-- Section: Links -->
+
+            <hr class="my-3">
+
+            <!-- Section: Copyright -->
+            <section class="p-3 pt-0">
+                <div class="row d-flex align-items-center">
+                    <!-- Grid column -->
+                    <div class="col-md-7 col-lg-8 text-center text-md-start">
+                        <!-- Copyright -->
+                        <div class="p-3">
+                            © 2020 Copyright:
+                            <a class="text-white"></a>
+                        </div>
+                        <!-- Copyright -->
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
+                        <!-- Facebook -->
+                        <a class="btn btn-outline-light btn-floating m-1"
+                           class="text-white"
+                           role="button">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+
+                        <!-- Twitter -->
+                        <a class="btn btn-outline-light btn-floating m-1"
+                           class="text-white"
+                           role="button">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+
+                        <!-- Google -->
+                        <a class="btn btn-outline-light btn-floating m-1"
+                           class="text-white"
+                           role="button">
+                            <i class="fab fa-google"></i>
+                        </a>
+
+                        <!-- Instagram -->
+                        <a class="btn btn-outline-light btn-floating m-1"
+                           class="text-white"
+                           role="button">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+            </section>
+            <!-- Section: Copyright -->
+        </div>
+        <!-- Grid container -->
+    </footer>
+    <!-- Footer -->
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

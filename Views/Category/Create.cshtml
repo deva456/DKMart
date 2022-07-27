@@ -1,0 +1,54 @@
+﻿@model DKMart.Models.Category
+<form method="post" asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="border p-4 mt-5">
+        <div class="form-group pb-3 pl-3 row"><h2 class="text-secondary">Add Category Details</h2></div>
+        <div class="row">
+            <div class="col-8">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="CatName"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="CatName" class="form-control" />
+                        <span asp-validation-for="CatName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="DisplayOrder"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="DisplayOrder" class="form-control" />
+                        <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="CatImageIcon"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="CatImageIcon" class="form-control" />
+                        <span asp-validation-for="CatImageIcon" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-8 offset-4 row">
+                        <div class="col">
+                            <input type="submit" value="Add" class="btn btn-outline-success w-100" />
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-outline-danger w-100">
+                                Back
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                @*keep this empty*@
+            </div>
+        </div>
+    </div>
+</form>
+

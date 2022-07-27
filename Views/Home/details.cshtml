@@ -1,0 +1,110 @@
+﻿@model DKMart.Models.ViewModels.DetailsVM
+<form method="post" class="overflow-hidden">
+    <input asp-for="@Model.Products.ProductId" hidden />
+    <div class="row ">
+
+        <div class="col-6  ">
+            <div class="container" >
+                <div class="border box-shadow text-center bg-light" style="border-radius:1em;">
+                    <img class="imageMain" src="@Model.Products.DetailImages" alt="" />
+                </div>
+                <div class="border box-shadow text-center d-inline-flex bg-light mt-3 pt-2 pb-2 " style="border-radius: 1em; justify-content: space-around;">
+                    <img class="w-25 img-thumbnail mr-2 ml-2" src="@Model.Products.image" alt="" onclick="ImageUpdate('@Model.Products.image')" />
+                    <img class="w-25 img-thumbnail mr-2" src="@Model.Products.DetailImages" alt="" onclick="ImageUpdate('@Model.Products.DetailImages')" />
+                    <img class="w-25 img-thumbnail mr-2" src="@Model.Products.DetailImages1" alt="" onclick="ImageUpdate('@Model.Products.DetailImages1')" />
+                </div>
+            </div>
+        </div>
+        <div class="col-6 border border bg-light " style="border-radius:1em;">
+            <div class="container " style="background-image: url('')">
+                <h2 class="pt-3 text-center text-secondary font-italic font-weight-bolder ">@Model.Products.title</h2>
+                <hr />
+                <div class="d-inline-flex">
+                    <div class=" ml-2 mt-5 " style="width:11em;height:3.4em;background-color:yellowgreen">
+                        <div class="text-left text-white bg-dark" style=""><span class="pr-4 pl-3 " style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif "><strong>MRP</strong></span><strong style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif "> Quantity</strong></div>
+                        <div class="text-left pl-3"><span style="padding-right:3.3em"><strong class="text-dark " style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ">₹</strong><span class="text-dark text-right">@Model.Products.price</span></span><span class="pr-3 text-black-50  " style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ">@Model.Products.quan_grams </span></div>
+                    </div>
+
+                    <div class="d-inline-flex" style="width:15em;padding-left:6em;">
+                        <div class="text-center text-secondary pr-5 pl-5" style="padding-top:3.5em;"><i class="fa-solid fa-square-plus fa-2x"id="plus" style="cursor: pointer"></i></div>
+                        <p style="padding-top:3.5em;">@Model.Products.price</p>
+                        <div class="text-center pl-5 text-secondary" style="padding-top: 3.5em; "><i class="fa-solid fa-square-minus fa-2x"id="minus" style="cursor: pointer"></i></div>
+                    </div>
+
+                </div>
+                <div class="d-inline-flex">
+                    <div class=" ml-2 mt-5 " style="width:10em;height:3.5em; background-color:lightcoral">
+                        <div class="text-center text-white bg-dark"><strong>Shelf Life</strong></div>
+                        <div class="text-center"><span class="text-black-50">Check Package</span></div>
+                    </div>
+                    @if (Model.ExistsInCart)
+                    {
+                        <a asp-action="removeFromCart" asp-route-ProductId="@Model.Products.ProductId" style="padding-left: 7em; padding-top: 4.5em" class=" text-black-50"><i class="fa-solid fa-minus btn btn-outline-danger" style="cursor: pointer;"> <span style="font-size:smaller;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Remove</span></i></a>
+                    }
+                    else
+                    {
+                        <div   style="padding-left: 7em; padding-top: 4.5em">
+                   <button type="submit" class="btn btn-outline-success form-control"asp-route-ProductId="@Model.Products.ProductId" ><i class="fa-solid fa-plus " style="cursor: pointer;"> <span style="font-size:smaller;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Add to cart</span></i></button> 
+                        </div>
+                    }
+
+                    @if (Model.Products.addToWishlist)
+                    {
+                        <a style="padding-left: 3em; padding-top: 4.5em" asp-route-ProductId="@Model.Products.ProductId"><i class="fa-solid fa-heart btn btn-outline-danger" style="cursor: pointer"> <span style="font-size:smaller;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ">Wishlisted</span></i> </a>
+                    }
+                    else
+                    {
+                        <a style="padding-left: 3em; padding-top: 4.5em"><i class="fa-solid fa-heart btn btn-outline-warning" style="cursor: pointer"> <span style="font-size:smaller;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ">Wishlist</span></i> </a>
+                    }
+
+
+                </div>
+                <h2 class="pt-5 pb-2 text-secondary">Description</h2>
+                <p class="text-dark ">@Model.Products.description</p>
+            </div>
+        </div>
+
+    </div>
+</form>
+
+@section Scripts{
+    <script>
+        function ImageUpdate(img) {
+            document.querySelector('.imageMain').src = img;
+            
+        }
+
+        </script>
+}
+
+ 
+<style>
+    .img-thumbnail {
+        cursor: pointer;
+        border-radius: 5px;
+        justify-content:space-between;
+        
+        
+    }
+    .img-thumbnail:hover{
+        background-color:lightgray;
+        
+    }
+    .imageMain {
+        width: 23em;
+        height: 23em;
+    }
+        .imageMain:hover {
+            cursor: zoom-in;
+            transform:scale(1.1);
+            border-radius:5px;
+           
+        }
+    #plus:hover {
+        color: yellowgreen;
+    }
+    #minus:hover {
+        color: orangered;
+    }
+   
+</style>

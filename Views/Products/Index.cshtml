@@ -1,0 +1,34 @@
+﻿@model IEnumerable<DKMart.Models.Products>
+<div class="pt-3">
+    <div class="container row">
+        <div class="col-6"><h2 class="text-secondary">Category List</h2> </div>
+        <div class="col-6 text-right"><a class="btn btn-outline-info" asp-action="Upsert"><i class="fa-solid fa-square-plus"></i> Products</a></div>
+    </div>
+    <br />
+    
+    @if (Model.Count() > 0)
+    {
+        @foreach (var obj in Model)
+        {
+            <div class="d-inline-flex flex-column pr-5 ml-5 pb-4">
+            <div class="card bg-light " style="width: 28rem;cursor:pointer">
+                <div class="text-center pt-3"><img src="@obj.image" class="card-img-top w-50 " alt="..."></div>
+                <div class="card-body">
+                    <div class="text-center pb-2"> <strong class="card-title">Title:<span class="font-weight-normal pl-2"> @obj.title</span></strong></div>
+                    <div class="text-center pb-2"> <strong class="card-text">Category Id:<span class="font-weight-normal pl-2">@obj.CatId</span></strong></div>
+                    <div class="text-center pb-2"> <strong class="card-text">Price:<span class="font-weight-normal pl-2">₹ @obj.price</span></strong></div>
+                    <div class="text-center pb-2"> <strong class="card-text">Quantity:<span class="font-weight-normal pl-2">@obj.quantity</span></strong></div>
+                    <div class="text-center pb-2"> <strong class="card-text">Description:<span class="font-weight-normal pl-2">@obj.description</span></strong></div>
+                    <div class="text-center pb-2"> <strong class="card-text">Wishlist:<span class="font-weight-normal pl-2">@obj.addToWishlist</span></strong></div>
+                    <hr />
+                    <div class="w-75 btn-group ml-5 pr-4 text-center" role="group">
+                        <a class="btn btn-outline-success mx-2"  asp-route-ProductId="@obj.ProductId" asp-action="Upsert"><i class="fa-solid fa-user-pen"></i></a>
+                        <a class="btn btn-outline-danger mx-2"  asp-route-ProductId="@obj.ProductId" asp-action="Delete"><i class="fa-solid fa-trash"></i></a>
+                    </div>
+                </div> 
+            </div>
+        </div>
+            }
+        }
+    </div>
+

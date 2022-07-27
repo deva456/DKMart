@@ -1,0 +1,166 @@
+﻿@model DKMart.Models.ViewModels.ProductsVM
+@{
+    var title = "Add Product";
+}
+<form method="post">
+    @if (Model.Products.ProductId != 0)
+    {
+        title = "Edit Product";
+        <input asp-for="Products.ProductId" hidden />
+    }
+    <div class="border p-4 mt-5">
+        <div class="form-group pb-3 pl-3 row"><h2 class="text-secondary">@title</h2></div>
+        <div class="row">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Products.CatId"></label>
+                </div>
+                <div class="col-8">
+                    <select asp-for="Products.CatId" class="form-control" asp-items="@Model.CategorySelectList">
+                        <option disabled selected>--select Category</option>
+                    </select>
+                    <span asp-validation-for="Products.CatId" class="text-danger"></span>
+                </div>
+            </div>
+            </div>
+
+        <div class="col-8">
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Products.addToWishlist"></label>
+                </div>
+                <div class="col-4">
+                    <input asp-for="Products.addToWishlist" class="form-control" />
+                    <span asp-validation-for="Products.addToWishlist" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Products.description"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Products.description" class="form-control" />
+                    <span asp-validation-for="Products.description" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Products.image"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Products.image" placeholder="Paste image link here!" class="form-control" />
+                    <span asp-validation-for="Products.image" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Products.price"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Products.price" class="form-control" />
+                    <span asp-validation-for="Products.price" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Products.quantity"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Products.quantity" class="form-control" />
+                    <span asp-validation-for="Products.quantity" class="text-danger"></span>
+                </div>
+            </div>
+            </div>
+
+            <div class="col-8">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Products.title"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Products.title" class="form-control" />
+                        <span asp-validation-for="Products.title" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Products.quan_grams"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Products.quan_grams" class="form-control" />
+                        <span asp-validation-for="Products.quan_grams" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Products.DetailImages"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Products.DetailImages" class="form-control" />
+                        <span asp-validation-for="Products.DetailImages" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Products.DetailImages1"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Products.DetailImages1" class="form-control" />
+                        <span asp-validation-for="Products.DetailImages1" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                @*<div class="text-center"><p class="text-danger">--OR--</p></div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Products.image"></label>
+                </div>
+                <div class="col-8">
+                    <input type="file" name="files" id="uploadBox" multiple class="form-control" />
+
+                </div>
+            </div>*@
+
+
+
+
+                <div class="form-group row">
+                    <div class="col-8 offset-4 row">
+                        <div class="col">
+                            @if (Model.Products.ProductId != 0)
+                            {
+                                <input type="submit" value="Update" class="btn btn-outline-success w-100" />
+                            }
+                            else
+                            {
+                                <input type="submit" value="Add" class="btn btn-outline-success w-100" />
+                            }
+
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-outline-danger w-100">
+                                Back
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                @*keep this empty*@
+                @*@if (Model.Products.ProductId != 0)
+            {
+            <img src="@WC.ImagePath@Model.Products.image" class="w-100" style="border-radius:5px; border:1px solid #bbb" />
+            }*@
+            </div>
+        </div>
+    
+</form>

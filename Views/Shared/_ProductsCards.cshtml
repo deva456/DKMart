@@ -1,0 +1,34 @@
+﻿@model DKMart.Models.Products
+<form method="post" class="overflow-hidden">
+    <input asp-for="@Model.ProductId" hidden />
+    <div class="col-12 col-md-6 col-lg-4 filter @Model.Category.CatName.Replace(' ','_')">
+        <a asp-action="details" asp-route-ProductId="@Model.ProductId" class="text-decoration-none">
+            <div class="card mb-3 badge-warning" style="        width: 16.7rem;
+        cursor: pointer;
+        background-image: url('https://t3.ftcdn.net/jpg/03/44/71/80/360_F_344718092_md9i5GZdOVIJgMdMrHqAE0OSYMpKD8Xq.jpg');
+
+
+">
+                <div class="text-right  text-secondary pr-3 pt-2"><i class="fa-solid fa-heart fa-xl"></i></div>
+                <div class="text-center pt-3"><img src="@Model.image" class="card-img-top w-50 " alt="..."></div>
+                <div class="card-body ">
+                    <div class="text-center pb-2"> <strong class="card-title text-dark">@Model.title</strong></div>
+                    <div class="text-left pl-2 card-title text-black-50">
+                        @Model.quan_grams
+                    </div>
+                    <hr />
+
+
+                    <div class="text-right">
+                        <span style="padding-right:7em"><strong class="text-dark ">₹</strong><span class="text-dark text-right">@Model.price</span></span></a>
+                        @*<a class="btn btn-outline-success  " asp-route-ProductId="@Model.ProductId" asp-controller="Home" asp-action="detailsPost"><span><i class="fa-solid fa-cart-plus "></i> Add</span></a>*@
+                        <button type="submit" class="btn btn-outline-success form-control w-25" asp-route-ProductId="@Model.ProductId" asp-controller="Home" asp-action="Details" style="cursor:pointer"> <span style="font-size:medium;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Add</span></button>
+                    </div>
+
+
+                </div>
+            </div>
+        
+    </div>
+    </form>
+
